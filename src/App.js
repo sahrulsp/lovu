@@ -68,10 +68,10 @@ class App extends Component {
       var min = new Date().getMinutes(); //Current Minutes
       var sec = new Date().getSeconds(); //Current Seconds
       if (hours >= 18) {greeting = 'Evening'}
-      if (hours >= 15) {greeting = 'Afternoon'}
-      if (hours >= 11) {greeting = 'Day'}
-      if (hours >= 5) {greeting = 'Morning'}
-      if (hours >= 0) {greeting = 'Night'}
+      elseif (hours >= 15) {greeting = 'Afternoon'}
+      elseif (hours >= 11) {greeting = 'Day'}
+      elseif (hours >= 5) {greeting = 'Morning'}
+      elseif (hours >= 0) {greeting = 'Night'}
       this.setState({
         curdate : hours + ':' + min + ':' + sec,
         greeting : greeting
