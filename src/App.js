@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { TwitterPicker } from "react-color";
 import reactCSS from "reactcss";
-import Particles from "react-particles-js";
 import baffle from "baffle";
 //import Baffle from "baffle-react";
 
