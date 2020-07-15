@@ -1,49 +1,33 @@
 import React, { Component } from "react";
 import { TwitterPicker } from "react-color";
 import reactCSS from "reactcss";
-import Particles from 'react-particles-js'; 
+import Particles from "react-particles-js";
+import baffle from "baffle";
+//import Baffle from "baffle-react";
 
-import "./App.css";
+import "./style/App.css";
+import config from "./config";
 
 class App extends Component {
-  static defaultProps = {
-    ucapan: [
-      "Whatever happens, keep breathing",
-    "Pam pam pararam ceklek jedar\nPararam ram parararam ram",
-    "Hey! I wuv chuuuu! UwU",
-    "I love you.",
-    "I may not with you everyday, but I love you everyday.",
-    "I love you.",
-    "I'm sorry for loving you.",
-    ],
-    panggilan: [
-      'Beb',
-      'Beib',
-      'Sayang',
-      'Jijaku'
-    ]
-  }
-  
   constructor(props) {
     super(props);
     this.state = {
       bgcolor: "#ff6900",
       displayColorPicker: false,
-      text: '',
+      text: "",
       isDeleting: false,
       loopNum: 0,
-      typingSpeed: 150
+      typingSpeed: 150,
+      already: false,
     };
   }
 
   componentDidMount() {
-    //localStorage.setItem('bgcolor', '#333');
-    //localStorage.getItem('bgcolor')
-    //localStorage.getItem('bgcolor') == '#000' ? console.log('hitam') : null
     this.mengetik();
     this.setState({
-      panggilan: this.props.panggilan[Math.floor(Math.random() * 
-      this.props.panggilan.length)]})
+      panggilan:
+        config.panggilan[Math.floor(Math.random() * config.panggilan.length)],
+    });
     this.getwaktu();
   }
 
@@ -56,51 +40,73 @@ class App extends Component {
   };
 
   handleChangeComplete = (color) => {
-    //console.log(color.hex);
-    //localStorage.setItem('bgcolor', color.hex);
     this.setState({ bgcolor: color.hex });
+    if (color.hex === "#000000") {
+      if(!this.state.already){this.baffle()}
+    }else{
+      this.setState({already: false})
+    }
+  };
+
+  baffle = () => {
+    this.setState({already: true})
+    let b = baffle(document.querySelector(".baffle"));
+    b.set({
+      characters: "█▓█ ▒░/▒░ █░▒▓/ █▒▒ ▓▒▓/█ ░█▒/ ▒▓░ █<░▒ ▓/░>",
+      speed: 120,
+    });
+    b.start();
+    b.reveal(4000);
   };
 
   getwaktu = () => {
-    setInterval( () => {
+    setInterval(() => {
       var greeting;
       var hours = new Date().getHours(); //Current Hours
       var min = new Date().getMinutes(); //Current Minutes
       var sec = new Date().getSeconds(); //Current Seconds
-      if (hours >= 18) {greeting = 'Evening'}
-      else if (hours >= 15) {greeting = 'Afternoon'}
-      else if (hours >= 11) {greeting = 'Day'}
-      else if (hours >= 5) {greeting = 'Morning'}
-      else if (hours >= 0) {greeting = 'Night'}
+      if (hours >= 18) {
+        greeting = "Evening";
+      }
+      if (hours >= 15) {
+        greeting = "Afternoon";
+      }
+      if (hours >= 11) {
+        greeting = "Day";
+      }
+      if (hours >= 5) {
+        greeting = "Morning";
+      }
+      if (hours >= 0) {
+        greeting = "Night";
+      }
       this.setState({
-        curdate : hours + ':' + min + ':' + sec,
-        greeting : greeting
-      })
-    },1000)
-  }
+        curdate: hours + ":" + min + ":" + sec,
+        greeting: greeting,
+      });
+    }, 0);
+  };
 
   mengetik = () => {
-    const { ucapan } = this.props;
+    const { ucapan } = config;
     const { isDeleting, loopNum, text, typingSpeed } = this.state;
     const i = loopNum % ucapan.length;
     const fullText = ucapan[i];
 
     this.setState({
-      text: isDeleting ? fullText.substring(0, text.length - 1) : fullText.substring(0, text.length + 1),
-      typingSpeed: isDeleting ? 30 : 150
+      text: isDeleting
+        ? fullText.substring(0, text.length - 1)
+        : fullText.substring(0, text.length + 1),
+      typingSpeed: isDeleting ? 30 : 150,
     });
 
     if (!isDeleting && text === fullText) {
-      
       setTimeout(() => this.setState({ isDeleting: true }), 500);
-      
-    } else if (isDeleting && text === '') {
-      
+    } else if (isDeleting && text === "") {
       this.setState({
         isDeleting: false,
-        loopNum: loopNum + 1
+        loopNum: loopNum + 1,
       });
-      
     }
 
     setTimeout(this.mengetik, typingSpeed);
@@ -113,7 +119,6 @@ class App extends Component {
           width: "36px",
           height: "14px",
           borderRadius: "2px",
-          //background: `${localStorage.getItem('bgcolor')}`,
           background: `${this.state.bgcolor}`,
         },
         swatch: {
@@ -146,7 +151,7 @@ class App extends Component {
           backgroundColor: this.state.bgcolor,
           transition: "all .7s ease",
           WebkitTransition: "all .7s ease",
-          MozTransition: "all .7s ease"
+          MozTransition: "all .7s ease",
         }}
       >
         <header className="masthead mb-auto">
@@ -162,18 +167,7 @@ class App extends Component {
                     //color={this.state.color}
                     onChange={this.handleChangeComplete}
                     triangle={"hide"}
-                    colors={[
-                      "#FF6900",
-                      "#FCB900",
-                      "#7BDCB5",
-                      "#00D084",
-                      "#8ED1FC",
-                      "#0693E3",
-                      "#ABB8C3",
-                      "#EB144C",
-                      "#F78DA7",
-                      "#000",
-                    ]}
+                    colors={config.colors}
                   />
                 </div>
               ) : null}
@@ -182,20 +176,25 @@ class App extends Component {
         </header>
 
         <main role="main" className="inner">
-        {this.state.bgcolor == '#000000' 
-        ? 
-        <div><h1>I Love You {this.state.panggilan}</h1></div> 
-        : 
-        <div>
-        <h1>{this.state.curdate}</h1>
-          <h2>Good {this.state.greeting} {this.state.panggilan}</h2>
-        <h3>{ this.state.text }<span id="cursor"/></h3>
-        </div>
-        }
+            <div>
+              <div className={this.state.bgcolor === '#000000' ? "hidden" : "show"}>
+                <h1>{this.state.curdate}</h1>
+                <h2>
+                  Good {this.state.greeting} {this.state.panggilan}
+                </h2>
+                <h3>
+                  {this.state.text}
+                  <span id="cursor" />
+                </h3>
+              </div>
+              <div className={this.state.bgcolor !== '#000000' ? "hidden" : "show"}>
+                <h1 className="baffle">Hi {this.state.panggilan}! Do you want to be my girlfriend? uWu</h1>
+              </div>
+            </div>
         </main>
         <footer className="mastfoot mt-auto">
           <div className="inner">
-            
+            <div></div>
           </div>
         </footer>
       </div>
