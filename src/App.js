@@ -5,6 +5,7 @@ import baffle from "baffle";
 //import Baffle from "baffle-react";
 
 import "./style/App.css";
+import "./style/Heart.css"
 import config from "./config";
 
 class App extends Component {
@@ -41,14 +42,16 @@ class App extends Component {
   handleChangeComplete = (color) => {
     this.setState({ bgcolor: color.hex });
     if (color.hex === "#000000") {
-      if(!this.state.already){this.baffle()}
-    }else{
-      this.setState({already: false})
+      if (!this.state.already) {
+        this.baffle();
+      }
+    } else {
+      this.setState({ already: false });
     }
   };
 
   baffle = () => {
-    this.setState({already: true})
+    this.setState({ already: true });
     let b = baffle(document.querySelector(".baffle"));
     b.set({
       characters: "█▓█ ▒░/▒░ █░▒▓/ █▒▒ ▓▒▓/█ ░█▒/ ▒▓░ █<░▒ ▓/░>",
@@ -66,17 +69,13 @@ class App extends Component {
       var sec = new Date().getSeconds(); //Current Seconds
       if (hours >= 18) {
         greeting = "Evening";
-      }
-      if (hours >= 15) {
+      }else if (hours >= 15) {
         greeting = "Afternoon";
-      }
-      if (hours >= 11) {
+      }else if (hours >= 11) {
         greeting = "Day";
-      }
-      if (hours >= 5) {
+      }else if (hours >= 5) {
         greeting = "Morning";
-      }
-      if (hours >= 0) {
+      }else if (hours >= 0) {
         greeting = "Night";
       }
       this.setState({
@@ -107,7 +106,6 @@ class App extends Component {
         loopNum: loopNum + 1,
       });
     }
-
     setTimeout(this.mengetik, typingSpeed);
   };
 
@@ -175,21 +173,34 @@ class App extends Component {
         </header>
 
         <main role="main" className="inner">
-            <div>
-              <div className={this.state.bgcolor === '#000000' ? "hidden" : "show"}>
-                <h1>{this.state.curdate}</h1>
-                <h2>
-                  Good {this.state.greeting} {this.state.panggilan}
-                </h2>
-                <h3>
-                  {this.state.text}
-                  <span id="cursor" />
-                </h3>
-              </div>
-              <div className={this.state.bgcolor !== '#000000' ? "hidden" : "show"}>
-                <h1 className="baffle">Hi {this.state.panggilan}! Do you want to be my girlfriend? uWu</h1>
-              </div>
+          <div>
+            <div
+              className={this.state.bgcolor === "#000000" ? "hidden" : "show"}
+            >
+              <h1 className="jam">{this.state.curdate}</h1>
+              <h2 className="panggilan">
+                Good {this.state.greeting} {this.state.panggilan}
+              </h2>
+              <h3 className="ucapan">
+                {this.state.text}
+                <span id="cursor" />
+              </h3>
+              <ul class="heart-shape">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
             </div>
+            <div
+              className={this.state.bgcolor !== "#000000" ? "hidden" : "show"}
+            >
+              <h1 className="baffle">
+                Hi {this.state.panggilan}! Do you want to be my girlfriend? uWu
+              </h1>
+            </div>
+          </div>
         </main>
         <footer className="mastfoot mt-auto">
           <div className="inner">
