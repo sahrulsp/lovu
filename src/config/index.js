@@ -6,9 +6,8 @@ export default {
     "I love you.",
     "I may not with you everyday, but I love you everyday.",
     "I love you.",
-    "I'm sorry for loving you.",
   ],
-  panggilan: ["Beb", "Beib", "Sayang", "Jijaku"],
+  panggilan: ["Difa"],
   colors: [
     "#FF6900",
     "#FCB900",
