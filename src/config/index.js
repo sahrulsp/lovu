@@ -1,11 +1,11 @@
 export default {
   ucapan: [
     "Whatever happens, keep breathing",
-    "Komitmen berarti komunikasi. Komitmen berarti mementingkan satu sama lain di atas ego kita sendiri.\nAre you ready?",
-    "You're my sunshine in the rain when it's pouring",
-    "Loving you is like breathing How can I stop?.",
-    "I may not with you everyday, but I love you everyday.",
-    ":).",
+    "Terima Kasih Sudah Mau Jadi Pendengar dan Pemberi Saran Untuk 2 Tahun Terakhir.\nTerima kasih masih menjadi pendengar yang baik, saat yang lain sibuk dengan dirinya sendiri.?",
+    "Terima kasih tidak pernah berkata lelah, padahal mata sudah berkata lelah.",
+    "Terima kasih pernah menjadi bagian yang bahagia dalam hidup, semoga saja kamu yang memilik akhir itu.",
+    "Kedepanya Mungkin Kita Akan Saling Segan-Segan Untuk Sekedar Menyapa,Mungkin?",
+    "Aku Sangat Berharap Tidak:).",
   ],
   panggilan: ["Putih Hartini"],
   colors: [
