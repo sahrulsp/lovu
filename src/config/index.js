@@ -1,11 +1,11 @@
 export default {
   ucapan: [
-    "Whatever happens, keep breathing",
-    "Terima Kasih Sudah Mau Jadi Pendengar dan Pemberi Saran Untuk 2 Tahun Terakhir.\nTerima kasih masih menjadi pendengar yang baik, saat yang lain sibuk dengan dirinya sendiri.?",
-    "Terima kasih tidak pernah berkata lelah, padahal mata sudah berkata lelah.",
-    "Terima kasih pernah menjadi bagian yang bahagia dalam hidup, semoga saja kamu yang memilik akhir itu.",
-    "Kedepanya Mungkin Kita Akan Saling Segan-Segan Untuk Sekedar Menyapa,Mungkin?",
-    "Aku Sangat Berharap Tidak:).",
+    "Hai,Hari ini Ngapain aja?",
+    "Have a nice day.\nMau Sedikit Cerita.?",
+    "Senin,10 Agustus Aku Mau PMPA/Pengabdian Kepada Masyarakat/KKN,Entah Bakal di Tempatkan di Daerah Mana.",
+    "Minta Doanya Yah Semoga diKuatkan dan di Mudahkan.",
+    "Take care of yourself",
+    "see you:).",
   ],
   panggilan: ["Putih Hartini"],
   colors: [
